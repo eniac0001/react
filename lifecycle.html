@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>LifeCycle</title>
+    <script src="../react-0.13.3/build/react.js"></script>
+    <script src="../react-0.13.3/build/JSXTransformer.js"></script>
+</head>
+<body>
+
+    <div id="lifecycle"></div>
+    <script type="text/jsx">
+
+    var LifeCycle = React.createClass({
+        getInitialState: function() {
+            console.log("1 - getInitialState");
+            return {
+                sValue: "sHello"  
+            };    
+        },    
+        getDefaultProps: function() {
+            console.log("2 - getDefaultProps");
+            return {
+                pValue: "pHello"  
+            };
+        },
+        propTypes: {
+            sValue: React.PropTypes.string  
+        },
+        statics: {
+
+        },
+        componentWillReceiveProps: function() {
+            console.log("componentWillReceiveProps");
+        },
+        componentWillMount: function() {
+            console.log("componentWillMount");  
+        },
+        componentDidMount: function() {
+            console.log("componentDidMount");
+        },
+        shouldComponentUpdate: function(nextProps, nextState) {
+            console.log(nextProps, nextState);
+            console.log("shouldComponentUpdate");
+            return true;
+        },
+       componentWillUpdate: function(nextProps, nextState) {
+            console.log(nextProps, nextState);
+            console.log("componentWillUpdate");  
+        },
+        componentDidUpdate: function(prevProps, prevState) {
+            console.log(prevProps, prevState, this.state.sValue);
+            console.log("componentDidUpdate");
+        },
+        handleSValue: function() {
+            this.setState({sValue: "shengli"});  
+        },
+        render: function() {
+            console.log("render");
+            return (
+                <div>
+                    <h1>{this.state.sValue}</h1>
+                    <h1>{this.props.pValue}</h1>
+                    <button onClick={this.handleSValue}>Click</button>
+                </div>
+            );    
+        }
+
+    });
+
+    React.render(<LifeCycle pValue="pTest" />, document.getElementById("lifecycle"));
+
+    </script>
+
+</body>
+</html>

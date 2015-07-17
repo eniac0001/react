@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mixin</title>
+    <script src="../react-0.13.3/build/react.js"></script>
+    <script src="../react-0.13.3/build/JSXTransformer.js"></script>
+</head>
+<body>
+
+    <div id="mixin"></div>
+    <script type="text/jsx">
+
+        var mixin = {
+            testProp: "testProp",
+            getDefaultProps: function() {
+                return {
+                    value: "Hello"    
+                };
+            }    
+        };
+
+        var MixinA = React.createClass({
+            mixins: [mixin], 
+            render: function() {
+                return (
+                    <div>{this.props.value}</div>
+                );    
+            }
+        });
+
+        var MixinB = React.createClass({
+            mixins: [mixin],
+            render: function() {
+                return (<div>
+                    <div>{this.props.value}</div>
+                    <div>{this.testProp}</div>
+                </div>);    
+            }
+        });
+
+        React.render(<div><MixinA value="world" /><MixinB /></div>, document.getElementById("mixin"));
+
+    </script>
+</body>
+</html>

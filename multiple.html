@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Comment Box by React</title>
+    <script src="../react-0.13.3/build/react.js"></script>
+    <script src="../react-0.13.3/build/JSXTransformer.js"></script>
+</head>
+<body>
+
+    <div id="multiple">
+
+    </div>
+    <div id="render"></div>
+    <div id="key"></div>
+
+    <script type="text/jsx">
+
+       /*
+            - owner-ownee relationship AND parent-child relationship;        
+
+            
+            
+            - Child Reconciliation?
+            - Stateful Children?
+        */ 
+
+        var Children = React.createClass({
+            render: function() {
+                return (
+                    <a href="#">A</a>
+                );    
+            }    
+        });
+
+        var ParentComponent = React.createClass({
+            render: function() {
+                return (
+                    <ul>
+                    {
+                        React.Children.map(this.props.children, function(child) {
+                            return <li key={child.id}>{child}</li>;    
+                        })    
+                    }
+                    </ul>
+                );   
+            } 
+        });
+
+        React.render(<ParentComponent><Children /><Children /></ParentComponent>, document.getElementById("multiple"));
+
+
+        React.render(<p>P1</p>, document.getElementById("render"));
+
+        var List = React.createClass({
+            render: function() {
+                return (
+                    <li>{this.props.data.text}</li>
+                );    
+            } 
+        });
+
+        var Wrapper = React.createClass({
+            render: function() {
+                return (
+                    <ul>{
+                    this.props.results.map(function(result) {
+                        console.log(result);
+                        return (
+                            <List key={result.id} data={result} /> 
+                        ); 
+                    }) 
+                    }</ul>
+                );
+            } 
+        });
+
+        /* React.render(<List data={"A"} />, document.getElementById("key")); */
+         React.render(<Wrapper results={[{id: 1, text: "A"}, {id: 2, text: "B"}]} />, document.getElementById("key"));
+    </script>
+
+</body>
+</html>

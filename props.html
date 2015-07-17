@@ -1,0 +1,64 @@
+<!DOCTYPE html5>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Props</title>
+    <script src="../react-0.13.3/build/react.js"></script>
+    <script src="../react-0.13.3/build/JSXTransformer.js"></script>
+</head>
+<body>
+    <div id="props"></div>
+    <div id="checkLink"></div>
+    <div id="validate"></div>
+    <script type="text/jsx">
+    
+    /*
+    */
+
+    var Props = React.createClass({
+        getDefaultProps: function() {
+            return {
+                value: "World" 
+            };  
+        },
+        propTypes: {
+            value: React.PropTypes.string
+        },
+        render: function() {
+            return (
+                <h1>{this.props.value}</h1>
+            );   
+        } 
+    });
+
+    React.render(<Props />, document.getElementById("props"));
+
+    var CheckLink = React.createClass({
+        render: function() {
+            return <a {...this.props} href="a.html">{this.props.children}</a>;    
+        } 
+    });
+
+    React.render(<CheckLink id="check" className="check" href="check.html">Click Here</CheckLink>, document.getElementById("checkLink"));
+
+    var List = React.createClass({
+        render: function() {
+            return (<li>List</li>);    
+        } 
+    });
+    var Wrap = React.createClass({
+        propTypes: {
+            /* list: React.PropTypes.instanceOf(<List />) */
+        },
+        render: function() {
+            return (
+                <div>{this.props.list}</div>
+            );      
+        }
+    });
+
+    React.render(<Wrap list={"A"} />, document.getElementById("validate"));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Event</title>
+    <script src="../react-0.13.3/build/react.js"></script>
+    <script src="../react-0.13.3/build/JSXTransformer.js"></script>
+</head>
+<body>
+    <div id="event"></div>
+
+    <script type="text/jsx">
+    
+    var Event = React.createClass({
+        clickHandle: function(event) {
+            console.log(event);                
+        },
+        getInitialState: function() {
+            return {
+                value: "Hello"    
+            };  
+        },
+        inputHandle: function(event) {
+            // this.state.value = event.target.value;
+            this.setState({value: event.target.value});
+        },
+        inputHandleC: function(event) {
+            console.log(event.target.value);
+        },
+        render: function() {
+            return (
+                <div>
+                    <h1>Event</h1>  
+                    <p onClick={this.clickHandle}>Click</p>
+                    <input type="text" defaultValue="world" onChange={this.inputHandleC} />
+                    <input type="text" value={this.state.value} onChange={this.inputHandle} />
+                    <br />
+                    <select multiple={true} value={['B', 'C']} >
+                        <option value='A'>A</option>
+                        <option value='B'>B</option>
+                        <option value='C'>C</option>
+                    </select>
+                    <input type="radio" name="sex">W</input>
+                    <input type="radio" name="sex">M</input>
+                </div>
+
+            );
+        }
+    });  
+
+    React.render(<Event />, document.getElementById("event"));
+    
+    /*
+        - Event:
+            - 跨浏览器的事件封装；
+            - 事件处理，默认在冒泡阶段，要在捕获阶段，事件名后添加Capture；
+        - Form Event:
+            - textarea: value;
+            - onChange: -- --;
+            - 要改变input等有value值得元素的value值，要使用onChange事件；
+        - 注意：
+            - React components: 要闭合标签；
+
+    
+    */
+    
+    </script>
+</body>
+</html>

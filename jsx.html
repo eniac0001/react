@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reusable Elements</title>
+    <script src="../react-0.13.3/build/react.js"></script>
+    <script src="../react-0.13.3/build/JSXTransformer.js"></script>
+</head>
+<body>
+    <div id="jsx"></div>
+    <div id="string"></div>
+    <div id="color"></div>
+    <script type="text/jsx">
+
+    var JSX = React.createClass({
+        render: function() {
+            return (
+                <p>
+                    {/* Testing comments; */}
+                    Hello, <input type="text" placeholder="Your name here" />!
+                    It is {this.props.date.toTimeString()} {/* testing comment 2*/}
+                    <div>First &middot; Second</div>
+                    <div>{'First \u00b7 Second'}</div>
+                    <div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
+                    <div>{['First -1 ', <span>&middot;</span>, ' Second']}</div>
+                    <div>{['First -1 ', ' Second']}</div>
+                    <div dangerouslySetInnerHTML={{__html: 'First &middot; Second'}} />
+                    <div data-custom-attribute="foo" />
+                    <div aria-hidden={true} />  {/* testing comment 3 */}
+                </p>
+            );
+        } 
+    });
+    /*
+        - JSX:
+            - React.render: HTML tags OR React components(classes);    
+                - For HTML tags: Just use lower-case tag names;
+                - For React components: start with a upper-case letter;
+                - class -> className; for -> htmlFor;
+            - Transform:
+                - 
+            - Namespaced Components
+                - create your "sub-components" as attributes of the main component;
+                - Example:
+                    var Form = React.createClass({...});
+                    Form.row = React.createClass({...});
+                    Form.input = React.createClass({...});
+            - Expressions:
+                - use braces: {};
+                - boolean attributes: {false};
+                - child expressions: 
+                - comments: if has chilren tag, use {};
+
+        - JSX Spread Attributes:
+            - Props: immutable;
+            - Spread: {...props};
+        - 注意的地方：
+            - 注释需要使用{}括起来；
+            - 对于数组形式的HTML，会使用标签组合；
+            - 像Nav，如何渲染到页面中？
+    */
+    setInterval(function() {
+    
+        React.render(<JSX date={new Date()} />, document.getElementById("jsx"));
+
+    }, 500);
+
+    React.render(<h1>String</h1>, document.getElementById("string"));
+
+    var Nav;
+    var props = {color: "blue", backgroundColor: "red"};
+    var app = <Nav {...props} color="green" />;
+    /* React.render(React.createElement(app), document.getElementById("color")); */
+    console.log(app.props);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html5>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Refs</title>
+    <script src="../react-0.13.3/build/react.js"></script>
+    <script src="../react-0.13.3/build/JSXTransformer.js"></script>
+</head>
+<body>
+    <div id="refs"></div>
+    <div id="checkLink"></div>
+    <script type="text/jsx">
+
+    var Refs = React.createClass({
+        getInitialState: function() {
+            return {
+                value: "Hello"  
+            };
+        },
+        changeHandle: function(event) {
+            this.setState({value: event.target.value});
+        },
+        render: function() {
+            return (
+                <div>
+                    <input value={this.state.value} ref="input" onChange={this.changeHandle} name="input" />
+                </div>
+            );    
+        } 
+    });
+
+    React.render(<Refs />, document.getElementById("refs"));
+    
+    </script>
+</body>
+</html>
