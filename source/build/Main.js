@@ -49,7 +49,7 @@
 	var React = __webpack_require__(2);
 	var TestElement = React.createClass({ displayName: "TestElement",
 	    render: function render() {
-	        return React.createElement("div", null, React.createElement("h1", null, "Test Element"));
+	        return React.createElement("div", null, React.createElement("h1", null, "Test Element"), React.createElement("hr", null), React.createElement("p", null, "This is beautiful line"));
 	    }
 	});
 	React.render(React.createElement(TestElement, null), document.body);
